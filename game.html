@@ -1,0 +1,62 @@
+<html>
+<head><title>game</title></head>
+<body>
+	<style>			
+		td {
+			width: 100px;
+			height: 100px;
+			padding: 0px;
+			border: 0px;
+		}
+	</style>
+	
+	<div id="game"></div>
+	
+	<script>
+		function changeColor(obj) {
+			if (obj.style.backgroundColor == 'blue') {
+				obj.style.backgroundColor = 'red';
+			} else {
+				obj.style.backgroundColor = 'blue';
+			}
+		}
+		
+		//var gridSize = prompt('Grid size:', 4);
+		var gridSize = 4;
+			
+		var gameField = document.createElement('table');
+		
+		var row = new Array(gridSize);
+		for (var i = 0; i < gridSize; i++) {
+			row[i] = document.createElement('tr');
+			
+			var col = new Array(gridSize);
+			for (var j = 0; j < gridSize; j++) {
+				col[j] = document.createElement('td');
+				col[j].className = j;
+				col[j].style.backgroundColor = 'blue';
+				//col[j].innerHTML = j;
+				
+				col[j].onclick = function () {
+					arr = this.parentNode.childNodes;
+					for (var i = 0; i < gridSize; i++) {
+						changeColor(arr[i]);
+					}
+					arr = document.getElementsByClassName(this.className);
+					for (var i = 0; i < gridSize; i++) {
+						if (arr[i].innerHTML == this.innerHTML && arr[i] != this) {
+							changeColor(arr[i]);
+						}
+					}
+				};
+				
+				row[i].appendChild(col[j]);
+			}
+			
+			gameField.appendChild(row[i]);
+		}
+		
+		game.appendChild(gameField);
+	</script>
+</body>
+</html>
